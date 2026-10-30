@@ -16,3 +16,7 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
+      - run: test -f src/hooks/runtime/useThreeBackground.ts
+      - run: test -f src/hooks/runtime/useThreeGlobe.ts
+      - run: test -f src/hooks/runtime/useSmoothScroll.ts
+      - run: test -f src/hooks/runtime/useGsapAnimations.ts
