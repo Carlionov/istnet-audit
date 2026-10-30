@@ -1,0 +1,35 @@
+MISTNET 3.3.4 — INTEGRATION QA
+
+PASS: npm run qa:static — 20/20 checks.
+PASS: qa-static.mjs imports only readdir; removed unused stat binding reported by ESLint.
+PASS: package.json and package-lock root dependency declarations agree.
+PASS: required project files and public assets exist.
+PASS: runtime.js SHA-256 unchanged: 29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90.
+PASS: no duplicate literal DOM IDs.
+PASS: internal hash links resolve to literal IDs.
+PASS: literal aria-controls references resolve.
+PASS: target="_blank" anchors include rel="noopener".
+PASS: robots sitemap URL has no duplicate slash.
+PASS: sitemap uses canonical root URL.
+PASS: refinement CSS has no !important, local :root, or negative margins.
+PASS: mistnet-v2.css breakpoints are mobile-first; capability/reduced-motion queries are permitted.
+PASS: CSS variable references resolve (Next font and runtime-injected variables are allow-listed).
+PASS: homepage has exactly one H1; 404 route has its own H1.
+PASS: document language is ru.
+PASS: public/og-image.jpg exists.
+PASS: Node syntax check for public/mistnet-runtime.js.
+PASS: TypeScript/TSX syntax transpilation: 40 files, 0 syntax diagnostics.
+PASS: PostCSS parsing: tokens.css, globals.css, mistnet-v2.css.
+PASS: SVG XML parse: public/favicon.svg.
+PASS: OG JPEG image size: 1200x630.
+PASS: mascot asset recognized as WebP.
+
+BLOCKED BY ENVIRONMENT:
+- npm ci: timeout while reaching npm registry.
+- npm run lint: EXIT 127 — eslint executable not installed.
+- npm run typecheck: EXIT 2 — type definition packages unavailable (estree, json-schema, json5, node, etc.).
+- npm run build: EXIT 127 — next executable not installed.
+- Chromium headless: 12-second timeout even for about:blank; responsive visual/interactions test not executed.
+- Lighthouse not executed; no Lighthouse score is claimed.
+
+No production build, real-browser pass, semantic typecheck, WCAG conformance, or Lighthouse score is claimed.

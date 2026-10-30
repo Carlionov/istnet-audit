@@ -1,0 +1,28 @@
+MISTNET — CHECKS 3.3.1
+
+PASS  PostCSS parse: src/styles/tokens.css
+PASS  PostCSS parse: src/app/globals.css
+PASS  PostCSS parse: src/app/mistnet-v2.css (unchanged in 3.3.1)
+PASS  468 unique CSS custom properties in tokens.css; duplicate definitions: 0
+PASS  CSS token references in tokens.css/globals.css: no missing design tokens
+NOTE  Runtime-defined custom properties remain dynamic by design: --angle, --mx, --my
+PASS  Spacing migration: 0 raw px in margin/padding/gap properties in globals.css
+PASS  Radius migration: 0 raw px in border-radius properties in globals.css
+PASS  Motion migration: 0 raw duration literals in transition/animation properties in globals.css
+PASS  Easing migration: 0 raw cubic-bezier definitions in globals.css
+PASS  Color migration: 0 raw hex/rgb/rgba literals in color-bearing declarations in globals.css
+PASS  Shadow migration: all 33 non-empty shadow declarations use named shadow/text-shadow tokens; 2 declarations intentionally use `none`
+PASS  !important count in globals.css: 0
+PASS  layout.tsx imports tokens.css before globals.css and mistnet-v2.css
+PASS  public/mistnet-runtime.js unchanged byte-for-byte
+
+NOT RUN  npm run lint
+NOT RUN  npm run typecheck
+NOT RUN  npm run build
+
+Reason: npm ci --offline fails because zod-validation-error@4.0.2 is not present in the local npm cache. An online npm ci attempt in the tool environment timed out. `npm ci --dry-run --offline --ignore-scripts --no-audit --no-fund` completed and resolved all 404 lockfile entries, but dry-run does not install the dependencies.
+
+Re-run in the user's installed project:
+  npm run lint
+  npm run typecheck
+  npm run build

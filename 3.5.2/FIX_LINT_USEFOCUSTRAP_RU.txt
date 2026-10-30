@@ -1,0 +1,26 @@
+Исправление предупреждения ESLint
+================================
+
+Файл: src/hooks/runtime/useFocusTrap.ts
+
+Причина:
+Cleanup-функция читала returnFocusRef.current. React Hooks ESLint предупреждает,
+что значение ref может измениться между установкой эффекта и cleanup.
+
+Исправление:
+Внутри useEffect значение сохраняется в локальную переменную:
+
+const returnFocusTarget = returnFocusRef?.current ?? null;
+
+Cleanup использует returnFocusTarget, не обращаясь повторно к .current:
+
+const returnTarget = returnFocusTarget ?? previouslyFocused;
+if (returnTarget?.isConnected) returnTarget.focus({ preventScroll: true });
+
+Поведение возврата фокуса сохраняется: при наличии returnFocusRef фокус
+возвращается на элемент, захваченный при открытии ловушки фокуса; иначе —
+на элемент, который был активен перед установкой эффекта.
+
+Incremental patch:
+MISTNET-3.5.1-useFocusTrap-eslint-fix.patch
+Target: src/hooks/runtime/useFocusTrap.ts

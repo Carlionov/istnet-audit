@@ -1,0 +1,26 @@
+MISTNET 3.3.5 — RELEASE HARDENING / CHECKS
+Дата: 2026-10-30
+
+PASS
+- npm run qa:static: 25/25.
+- package.json / package-lock root dependency parity.
+- 404 package-lock entries: resolved URL + integrity; npm registry host.
+- .env.example is Git-trackable; .env.local remains ignored.
+- .env.example contains empty endpoint/token values, no real secret.
+- runtime.js SHA-256 unchanged: 29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90.
+- Duplicate DOM IDs: none.
+- Internal anchors and literal aria-controls: resolved.
+- CSS tokens and responsive breakpoints: passed static checks.
+- TS/TSX syntax transpilation: 40 files, 0 syntax diagnostics.
+- PostCSS parse: tokens.css, globals.css, mistnet-v2.css passed.
+- Node syntax: qa-static.mjs, qa-release.mjs, mistnet-runtime.js passed.
+- ZIP integrity: checked after packaging.
+
+BLOCKED BY ENVIRONMENT
+- npm run qa:release: qa:static passed; stopped at `npm run lint` because `eslint` executable is absent (127).
+- npm run typecheck: missing `next`, `react`, `@types/node`, `@types/react`, and associated type definitions; not a semantic typecheck result.
+- npm run build: `next` executable absent (127).
+- npm cache is empty; previous npm registry install attempt timed out.
+- No real browser / Lighthouse result is claimed.
+
+Conclusion: project passes static and syntax-level checks. Full lint, semantic TypeScript check, production build and browser QA must be run after `npm ci` in a network-enabled local environment.

@@ -1,0 +1,79 @@
+MISTNET — STEP 3.5.1 CHECK REPORT
+================================
+
+BASELINE (USER-PROVIDED, BEFORE 3.5.1 FILES)
+-------------------------------------------
+The user supplied successful output from the local Windows project:
+- npm ci: added 347 packages
+- npm run lint: exit 0, no warnings/errors shown
+- npm run typecheck: exit 0
+- npm run build: Next.js 16.4.3, compiled successfully, TypeScript passed,
+  static routes generated, build finalized.
+
+This is the confirmed 3.4.2 baseline only. It is not a build result for 3.5.1.
+
+3.5.1 SOURCE CHECKS IN THIS ENVIRONMENT
+---------------------------------------
+1) node scripts/qa-static.mjs
+   PASS 25/25, 0 failed.
+
+2) Strict targeted TypeScript check for all new runtime hooks/utilities
+   Command: tsc --project /tmp/mistnet-3.5.1-types/tsconfig.json --pretty false
+   Result: PASS, no diagnostics (strict, noUnusedLocals, noUnusedParameters).
+   Scope: src/hooks/runtime/**/*.ts and src/lib/runtime/**/*.ts with temporary
+   minimal React declarations because npm packages are not installed here.
+   This is not a substitute for the full project typecheck.
+
+3) TS/TSX syntax transpilation
+   69 source files; 0 syntax errors.
+
+4) PostCSS parser
+   src/styles/tokens.css: PASS
+   src/app/globals.css: PASS
+   src/app/mistnet-v2.css: PASS
+
+5) Node syntax
+   public/mistnet-runtime.js: PASS
+   scripts/qa-static.mjs: PASS
+   scripts/qa-release.mjs: PASS
+
+6) CSS continuity
+   src/app/mistnet-v2.css begins byte-for-byte with the user-provided
+   /mnt/data/mistnet-v2.css; the 3.4.2 extracted section rules are appended.
+
+7) Runtime integrity
+   public/mistnet-runtime.js SHA-256:
+   29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90
+   Same as 3.4.2; runtime unchanged.
+
+FULL NPM COMMANDS IN THIS ENVIRONMENT (ACTUAL OUTPUT)
+----------------------------------------------------
+`npm ci --ignore-scripts --no-audit --no-fund --fetch-retries=0 --fetch-timeout=20000`
+   npm error Exit handler never called!
+   Exit code: 1
+
+`npm run lint`
+   > eslint .
+   sh: 1: eslint: not found
+   Exit code: 127
+
+`npm run typecheck`
+   error TS2688: Cannot find type definition file for 'estree'.
+   error TS2688: Cannot find type definition file for 'json-schema'.
+   error TS2688: Cannot find type definition file for 'json5'.
+   error TS2688: Cannot find type definition file for 'node'.
+   error TS2688: Cannot find type definition file for 'react'.
+   error TS2688: Cannot find type definition file for 'react-dom'.
+   Exit code: 2
+
+`npm run build`
+   > next build
+   sh: 1: next: not found
+   Exit code: 127
+
+CONCLUSION
+----------
+The hook/util files pass targeted strict checks and syntax/static checks. The full
+3.5.1 lint, typecheck and production build could not be executed in this environment
+because npm ci did not complete. Do not mark 3.5.1 green until those three commands
+are run successfully in the user's installed Windows environment.

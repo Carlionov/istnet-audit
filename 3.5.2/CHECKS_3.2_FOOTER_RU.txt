@@ -1,0 +1,19 @@
+MISTNET — STEP 3.2 CHECK REPORT
+
+PASS: Footer moved into src/components/footer and composed from typed subcomponents.
+PASS: src/components/Footer.tsx removed; src/app/page.tsx imports the new path.
+PASS: Original internal anchors preserved: #pricing, #map, #faq.
+PASS: Original account, Quick Purchase, support and bot URLs preserved through MISTNET_LINKS.
+PASS: Original target behavior preserved: Cabinet and Quick Purchase same tab; Telegram support and bot new tab.
+PASS: Footer CSS class names preserved: footer, footer-inner, footer-brand, logo, footer-col, footer-bottom.
+PASS: Footer runtime contract audit: public/mistnet-runtime.js contains no footer class or id selectors.
+PASS: public/mistnet-runtime.js unchanged (SHA-256 equality with step 3.1 input).
+PASS: globals.css and mistnet-v2.css unchanged (SHA-256 equality with step 3.1 input).
+PASS: No inline styles in new footer/icon components or TrustBar.
+PASS: Feature icons centralized in typed FeatureIcon component; SVG uses currentColor and a consistent 1.7 stroke.
+PASS: Copyright sign © retained as legal text; no decorative symbol/emoji was present in the old Footer.
+PASS: Scoped strict TypeScript check of all changed TS/TSX files using global TypeScript and minimal Next/React declaration shims.
+
+NOT RUN: Full npm run lint, npm run typecheck, npm run build. The project dependency tree is not installed in this execution environment. Run all three commands in the user's local project to validate against the installed Next.js/React/ESLint versions.
+
+CSS change: none. No changes to globals.css or mistnet-v2.css.

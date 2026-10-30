@@ -1,0 +1,60 @@
+MISTNET 3.5.2 — CHECK REPORT
+=============================
+
+STATIC QA
+Command: node scripts/qa-static.mjs
+Result: 39/39 passed; 0 failed.
+
+TYPESCRIPT / TSX SYNTAX
+64 .ts/.tsx source files transpiled with TypeScript transpileModule.
+Result: 0 syntax diagnostics.
+
+LOCAL IMPORT RESOLUTION
+65 source files scanned for @/ alias imports.
+Result: PASS; 0 unresolved local imports.
+
+CSS PARSING
+src/styles/tokens.css: PASS
+src/app/globals.css: PASS
+src/app/mistnet-v2.css: PASS
+
+NODE SCRIPT SYNTAX
+node --check for all scripts/*.mjs: PASS
+
+LEGACY RUNTIME
+public/mistnet-runtime.js: DELETED
+MistnetScripts.tsx: DELETED
+Old runtime-only adapters/hooks: DELETED
+Legacy data-track/data-ping/data-node/data-plan/data-copy/data-counter/data-bot-trigger/data-leg-ping/data-location-status/data-lenis-prevent: removed from TSX.
+CSS-required data-status-location and data-text remain.
+
+REQUIRED NPM COMMANDS IN THIS CONTAINER
+
+$ npm run lint
+> mistnet-landing@2.5.4 lint
+> eslint .
+sh: 1: eslint: not found
+Exit code: 127
+
+$ npm run typecheck
+> mistnet-landing@2.5.4 typecheck
+> tsc --noEmit
+error TS2688: Cannot find type definition file for 'estree'.
+error TS2688: Cannot find type definition file for 'json-schema'.
+error TS2688: Cannot find type definition file for 'json5'.
+error TS2688: Cannot find type definition file for 'node'.
+error TS2688: Cannot find type definition file for 'react'.
+error TS2688: Cannot find type definition file for 'react-dom'.
+Exit code: 2
+
+$ npm run build
+> mistnet-landing@2.5.4 build
+> next build
+sh: 1: next: not found
+Exit code: 127
+
+$ npm ci --no-audit --no-fund
+Timed out / npm process exit handler failure before dependencies were installed.
+
+IMPORTANT
+No clean ESLint, semantic TypeScript, or production build log is claimed for 3.5.2. These commands remain to be passed in the user's Windows project environment before the phase can be accepted as production-verified.

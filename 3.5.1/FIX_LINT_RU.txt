@@ -1,0 +1,19 @@
+MISTNET 2.5.3 — ИСПРАВЛЕНИЕ ESLINT
+
+В этом обновлении исправлены замечания из вывода npm run lint:
+
+1. Header.tsx и Footer.tsx: внутренний переход на главную переведён на next/link.
+2. MistnetScripts.tsx: заменён старый @ts-nocheck на типизированную обёртку next/script.
+3. Hero.tsx: <img> заменён на next/image с priority для LCP.
+4. layout.tsx: внешнее подключение Google Fonts заменено на next/font/google — шрифты self-hosted Next.js.
+5. mistnet-runtime.js: исправлены выражения, которые ESLint помечал как no-unused-expressions, и неиспользуемый catch-параметр.
+6. В motion-layer была обнаружена невызываемая IIFE-обёртка. Теперь она вызывается, поэтому мобильное меню, feedback кнопок и conversion tracking инициализируются.
+
+Установка обновления:
+- Распакуйте архив поверх проекта с заменой файлов.
+- Проверьте, что src/components/MistnetScripts.tsx заменился новой версией.
+- Выполните npm ci, затем npm run lint и npm run typecheck.
+
+Ожидаемый результат: 0 ошибок и 0 предупреждений ESLint для файлов, перечисленных в исходном логе.
+
+Если в вашем рабочем проекте есть другие изменённые файлы, сделайте резервную копию перед заменой.

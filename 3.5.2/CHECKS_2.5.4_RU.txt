@@ -1,0 +1,14 @@
+MISTNET 2.5.4 — РЕЗУЛЬТАТЫ ДОСТУПНЫХ ПРОВЕРОК
+
+УСПЕШНО
+- Синтаксическая транспиляция 25 файлов TypeScript / TSX.
+- Разбор src/app/globals.css и src/app/mistnet-v2.css через PostCSS.
+- node --check public/mistnet-runtime.js.
+- package.json и package-lock.json — корректный JSON, версия 2.5.4 совпадает в обоих файлах.
+- 53 статических JSX ID: дубликатов нет.
+- 31 внутренний якорь: неразрешённых ссылок нет.
+- Текстовые символы ✦ удалены из feature ribbon, вместо них используются inline SVG.
+
+НЕ ПОДТВЕРЖДЕНО В ЭТОЙ СРЕДЕ
+- Полный ESLint / TypeScript typecheck / next build не запускались после последней правки: установка npm-зависимостей в этой среде завершилась по тайм-ауту. Зависимости в package.json не менялись; изменены только компоненты и CSS.
+- На рабочем компьютере выполнить: npm run lint, npm run typecheck, npm run build.

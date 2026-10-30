@@ -1,0 +1,20 @@
+MISTNET — ШАГ 3.1 / HERO
+
+Проверено:
+[PASS] TS/TSX syntax: 9 файлов
+[PASS] Strict isolated TypeScript check для новых компонентов и их локальных импортов
+[PASS] Runtime ID contracts: heroCanvas, heroTitle, statusBadge, statusLabel, statusNote, tiltContainer, botSay, appDemoBadge
+[PASS] SVG references: shieldFill, shieldStroke, shieldGlow
+[PASS] Class names and data-* contracts from the previous Hero preserved
+[PASS] No inline style={{...}} in Hero components
+[PASS] hero.data.ts declares readonly typed location/server/stat arrays
+[PASS] Runtime mistnet-runtime.js unchanged
+[PASS] Global CSS files unchanged; initial ping width lives in HeroPingPanel.module.css
+
+NOT RUN:
+[NOT RUN] npm run lint
+[NOT RUN] npm run typecheck (full project with real Next.js/React type packages)
+[NOT RUN] npm run build
+
+Причина: npm ci в среде сборки завершился по тайм-ауту доступа к npm registry.
+Запустить все три команды в локальном проекте после распаковки архива.

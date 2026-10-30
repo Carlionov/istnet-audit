@@ -1,0 +1,25 @@
+MISTNET 3.3.3 — A11Y / MOBILE NAVIGATION CHECK REPORT
+
+PASS: Closed FAQ answers use visibility:hidden.
+PASS: Open FAQ answers use visibility:visible via .faq-item.active.
+PASS: Existing FAQ DOM, IDs, active class and aria-expanded runtime logic preserved.
+PASS: MobileMenuA11y is an isolated "use client" helper returning null.
+PASS: Escape while menu open restores focus to #burger.
+PASS: Activating a link inside #mnav restores focus to #burger.
+PASS: Event listeners are removed on unmount.
+PASS: Header remains a Server Component without React event props.
+PASS: #palOpen declares aria-controls="pal" and aria-haspopup="dialog".
+PASS: aria-keyshortcuts documents Control+K and Meta+K.
+PASS: Page mounts MobileMenuA11y without changing runtime integration.
+PASS: Static source-contract assertions: 19/19.
+PASS: PostCSS parse: tokens.css, globals.css, mistnet-v2.css.
+PASS: TypeScript/TSX syntax transpilation: 40 source files, 0 syntax diagnostics.
+PASS: Runtime SHA-256 unchanged: 29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90.
+
+BLOCKED BY ENVIRONMENT:
+- npm run lint: EXIT 127 — eslint executable is not installed.
+- npm run typecheck: EXIT 2 — React / Next.js modules and type declarations are unavailable; tsc reports cascading missing JSX intrinsic-element errors. This is not a clean semantic typecheck.
+- npm run build: EXIT 127 — next executable is not installed.
+- Full browser interaction / responsive visual run: Chromium headless hangs before returning a DOM result.
+
+No production build, Lighthouse score, WCAG conformance or real-browser pass is claimed.

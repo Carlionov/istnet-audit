@@ -1,0 +1,72 @@
+MISTNET — STEP 3.4.2 CHECK REPORT
+=================================
+
+STATIC QA
+---------
+Command: node scripts/qa-static.mjs
+Result: PASS 25/25, 0 failed.
+
+Representative output:
+PASS 08. runtime.js preserved byte-for-byte — 29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90
+PASS 09. No duplicate literal DOM IDs
+PASS 10. Internal hash links resolve to declared IDs
+PASS 11. Literal aria-controls references resolve
+PASS 15. Refinement CSS contains no !important
+PASS 16. Refinement CSS has no local :root declaration
+PASS 17. Refinement CSS contains no negative margins
+PASS 18. Refinement CSS breakpoints are mobile-first
+PASS 19. CSS variable references resolve
+Static QA: 25/25 passed; 0 failed.
+
+SYNTAX / CSS
+------------
+TS/TSX transpile syntax check: 48 source files; 0 syntax errors.
+PostCSS:
+- src/styles/tokens.css: PASS
+- src/app/globals.css: PASS
+- src/app/mistnet-v2.css: PASS
+Node syntax check:
+- public/mistnet-runtime.js: PASS
+- scripts/qa-static.mjs: PASS
+- scripts/qa-release.mjs: PASS
+
+TARGETED COMPONENT TYPECHECK
+----------------------------
+Command: tsc --project /tmp/mistnet-components-tsconfig.json --pretty false
+Result: PASS, no diagnostics.
+Scope: changed components and imported component/data dependencies, compiled under strict mode with temporary minimal React/Next declarations because project dependencies are not installed. This is not a substitute for the full project typecheck.
+
+INLINE STYLES / FILE INTEGRITY
+------------------------------
+Search: rg -n 'style=' src --glob '*.{tsx,ts}'
+Result: no matches.
+public/mistnet-runtime.js SHA-256:
+29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90
+Same SHA-256 as the previous baseline.
+User-provided /mnt/data/mistnet-v2.css is included as the byte-for-byte prefix of src/app/mistnet-v2.css; only the stage 3.4.2 section CSS was appended.
+
+REQUESTED FULL PROJECT COMMANDS (ACTUAL ENVIRONMENT OUTPUT)
+----------------------------------------------------------
+1) npm run lint
+> mistnet-landing@2.5.4 lint
+> eslint .
+sh: 1: eslint: not found
+Exit code: 127
+
+2) npm run typecheck
+> mistnet-landing@2.5.4 typecheck
+> tsc --noEmit
+Failed because node_modules are not installed in this environment. Observed diagnostics include:
+- TS2307: Cannot find module 'next' or its corresponding type declarations.
+- TS2307: Cannot find module 'react' or its corresponding type declarations.
+- TS2875: jsx-runtime module cannot be found.
+- TS2580: Cannot find name 'process' (missing @types/node).
+Exit code: 2
+
+3) npm run build
+> mistnet-landing@2.5.4 build
+> next build
+sh: 1: next: not found
+Exit code: 127
+
+The three full-project commands did NOT pass. No zero-error claim is made. npm dependency installation previously timed out against the registry; offline installation also lacked a cached package. Run these commands in an environment with npm dependencies installed before release.

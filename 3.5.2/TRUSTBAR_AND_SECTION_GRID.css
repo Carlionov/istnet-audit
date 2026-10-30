@@ -1,0 +1,168 @@
+/* --------------------------------------------------------------------------
+   TrustBar + section grid corrections
+   Place after the existing globals.css and section styles in mistnet-v2.css.
+   -------------------------------------------------------------------------- */
+
+/* Trust ribbon — six equal columns on wide desktop, compact grids below. */
+.trust-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  list-style: none;
+  gap: var(--space-3);
+  width: min(1200px, calc(100% - var(--space-8)));
+  max-width: 1200px;
+  margin: var(--space-5) auto var(--space-7);
+  padding: var(--space-4) 0;
+  border-block: 1px solid var(--palette-79cfeb-12);
+  box-sizing: border-box;
+}
+.trust-item {
+  display: flex;
+  min-width: 0;
+  min-height: 76px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--palette-79cfeb-12);
+  border-radius: var(--radius-md);
+  color: var(--palette-d6e7f4-82);
+  background: linear-gradient(145deg, var(--palette-0c1b2b-74), var(--palette-060d17-72));
+  font-family: var(--font-manrope), sans-serif;
+  font-size: var(--type-body-small);
+  font-weight: 700;
+  line-height: var(--line-height-card);
+  text-align: start;
+  transition:
+    transform var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    background var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
+}
+.trust-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-primary-32);
+  background: linear-gradient(145deg, var(--palette-0d283c-88), var(--palette-07111d-86));
+  box-shadow: var(--shadow-trust-hover);
+}
+.trust-item .trust-mark {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--color-primary-2);
+  border-radius: var(--radius-sm);
+  color: var(--palette-68deef);
+  background: var(--color-primary-07);
+}
+.trust-label {
+  min-width: 0;
+  line-height: var(--line-height-card);
+  overflow-wrap: normal;
+  text-wrap: pretty;
+}
+.trust-icon,
+.feature-icon {
+  display: block;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: currentColor;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  flex: 0 0 auto;
+}
+.hero-server-feature-icon,
+.telegram-fab-icon {
+  display: block;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  flex: 0 0 auto;
+}
+.cabinet-fab-icon {
+  display: block;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+}
+.nav-search-icon {
+  display: block;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+}
+.feature-icon--sm { width: var(--icon-size-sm); height: var(--icon-size-sm); }
+.feature-icon--md { width: var(--icon-size-md); height: var(--icon-size-md); }
+.feature-icon--lg { width: var(--icon-size-lg); height: var(--icon-size-lg); }
+.trust-item .dot { display: none; }
+.trust-item.trial-item { color: var(--primary); }
+
+/* Equalise Advantage cards and keep their copy aligned to the card bottom. */
+.advantages-grid { align-items: stretch; }
+.advantage-card {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
+}
+.advantage-card p { margin-block-start: auto; }
+
+/* Pricing: one column on phones, two equal-height columns from tablet upward. */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: var(--space-5);
+  width: min(100%, 1000px);
+  margin-inline: auto;
+}
+.price-card { min-width: 0; height: 100%; cursor: auto; }
+
+/* Responsive TrustBar / Advantages / Pricing layout */
+@media (min-width: 421px) {
+  .trust-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 721px) {
+  .trust-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .trust-item { min-height: 76px; justify-content: center; font-size: var(--type-body-small); }
+
+  .advantages-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: var(--space-4);
+    max-width: 760px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    max-width: 1000px;
+  }
+
+  .price-desc { min-height: 7em; }
+}
+
+@media (min-width: 961px) {
+  .trust-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1101px) {
+  .advantages-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 1180px; }
+}
+
+@media (min-width: 1241px) {
+  .trust-bar { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .trust-item {
+    min-height: 68px;
+    padding-inline: var(--space-2);
+    font-size: var(--type-small-plus);
+    white-space: nowrap;
+  }
+  .trust-label { white-space: nowrap; }
+}

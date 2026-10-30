@@ -1,0 +1,26 @@
+MISTNET 3.3.2.2 — ICONS / TRUSTBAR CHECK REPORT
+
+PASS: FeatureIcon provides typed sizes sm / md / lg.
+PASS: FeatureIcon retains round line caps and joins from the previous implementation.
+PASS: FeatureIcon has no hardcoded width, height or strokeWidth attributes.
+PASS: Legacy trust-icon class remains as the default for backward CSS compatibility.
+PASS: TrustBar renders all six items with the shared FeatureIcon component.
+PASS: TrustBar labels have a dedicated trust-label CSS hook.
+PASS: Header search icon uses nav-search-icon.
+PASS: Hero access check uses hero-access-check-icon.
+PASS: Hero server feature SVG uses hero-server-feature-icon.
+PASS: Advantages SVG stroke width is controlled by --icon-stroke.
+PASS: Cabinet action SVG uses cabinet-fab-icon.
+PASS: Flag sprite uses flag-sprite selector; flag artwork dimensions are intentionally preserved.
+PASS: tokens.css and mistnet-v2.css are byte-identical to 3.3.2.1 CSS deliverable.
+PASS: New visual CSS hook classes are not referenced by runtime.js.
+PASS: public/mistnet-runtime.js SHA-256 unchanged: 29f9d7a2d38a1556daa01af9b1c3fafaddbdb54c992f241d704def9842ffbe90
+PASS: TypeScript/TSX syntax transpilation: 39 source files, 0 syntax diagnostics.
+
+NOT RUN — environment limitation:
+- npm ci could not complete because access to npm registry timed out.
+- eslint, tsc type libraries and next build executable are not available in the incomplete node_modules tree; lint, semantic typecheck and production build are therefore not claimed as passing.
+- A real-browser responsive viewport run is not claimed.
+
+Scope note:
+The mascot, network bridge, location fallback illustration and flag artwork retain their own SVG geometry. They are illustrations/assets, not reusable UI icons.

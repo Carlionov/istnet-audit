@@ -1,0 +1,26 @@
+MISTNET 3.3.2.1 — CSS CHECK REPORT
+
+PASS: PostCSS src/styles/tokens.css
+PASS: PostCSS src/app/globals.css
+PASS: PostCSS src/app/mistnet-v2.css
+PASS: CSS variables: 500 declarations, 500 unique names, 0 undefined design-token references
+PASS: mistnet-v2.css !important count = 0 (baseline 3.3.1: 36)
+PASS: mistnet-v2.css local :root blocks = 0
+PASS: mistnet-v2.css @media max-width queries = 0
+PASS: mistnet-v2.css negative margin declarations = 0
+PASS: mistnet-v2.css raw color literals = 0
+PASS: icon tokens: --icon-size-sm, --icon-size-md, --icon-size-lg, --icon-stroke
+PASS: mobile-first viewport breakpoints: 421, 721, 961, 1101, 1241, 1400, 1600 px
+PASS: inputs use --type-body (16px)
+PASS: fixed actions use safe-area insets
+PASS: public/mistnet-runtime.js SHA-256 unchanged
+PASS: TypeScript/TSX syntax transpilation in full working tree: 39 files, 0 syntax diagnostics
+
+NOT RUN — environment limitation:
+- npm ci: timeout while contacting npm registry
+- npm run lint: eslint executable unavailable in incomplete node_modules (exit 127)
+- npm run typecheck: missing @types/node, @types/react, @types/react-dom and implicit type libraries (exit 2)
+- npm run build: next executable unavailable in incomplete node_modules (exit 127)
+- Chromium headless responsive viewport run did not complete; no browser-layout PASS is claimed.
+
+This report does not claim that the production build is green.
