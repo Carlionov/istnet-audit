@@ -3,6 +3,8 @@ on:
   push:
     branches: [3.5.2-hybrid]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,6 +13,24 @@ jobs:
         working-directory: 3.5.2
     steps:
       - uses: actions/checkout@v4
+      - name: Fix legacy malformed CSS
+        working-directory: .
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('3.5.2/src/app/globals.css')
+          lines = p.read_text(encoding='utf-8').splitlines()
+          if len(lines) >= 80 and lines[75].strip() == 'position:absolute;inset:0;width:100%;height:100%;':
+              del lines[75:80]
+              p.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet -- 3.5.2/src/app/globals.css; then
+            git add 3.5.2/src/app/globals.css
+            git commit -m "fix(3.5.2): remove malformed legacy hero css [skip ci]"
+            git push
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -20,3 +40,10 @@ jobs:
       - run: test -f src/hooks/runtime/useThreeGlobe.ts
       - run: test -f src/hooks/runtime/useSmoothScroll.ts
       - run: test -f src/hooks/runtime/useGsapAnimations.ts
+      - name: Package source
+        working-directory: .
+        run: zip -r mistnet-3.5.2-hybrid.zip 3.5.2 -x '3.5.2/node_modules/*' '3.5.2/.next/*'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mistnet-3.5.2-hybrid
+          path: mistnet-3.5.2-hybrid.zip
