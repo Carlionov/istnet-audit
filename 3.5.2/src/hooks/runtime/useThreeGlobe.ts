@@ -18,6 +18,14 @@ export function useThreeGlobe(canvasRef: RefObject<HTMLCanvasElement | null>): v
     const wrap = canvas.parentElement;
     if (!wrap) return;
 
+    canvas.style.position = "absolute";
+    canvas.style.top = "0";
+    canvas.style.left = "0";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.zIndex = "0";
+    canvas.style.touchAction = "none";
+
     let webglContext: WebGLRenderingContext | WebGL2RenderingContext | null = null;
     try {
       webglContext = canvas.getContext("webgl2", { alpha: true, antialias: true, depth: true, stencil: false, premultipliedAlpha: true, preserveDrawingBuffer: false }) ||
@@ -40,6 +48,7 @@ export function useThreeGlobe(canvasRef: RefObject<HTMLCanvasElement | null>): v
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, context: webglContext, antialias: !mobile, alpha: true, powerPreference: mobile ? "default" : "high-performance" });
+      renderer.setClearColor(0x000000, 0);
       renderer.setPixelRatio(pixelRatio(width, height, mobile));
       renderer.setSize(width, height, false);
     } catch {
@@ -186,7 +195,6 @@ export function useThreeGlobe(canvasRef: RefObject<HTMLCanvasElement | null>): v
         }
       });
       renderer.dispose();
-      try { renderer.forceContextLoss(); } catch {}
       scene.clear();
       initialized.current = false;
     };
