@@ -28,6 +28,14 @@ export function useThreeBackground(canvasRef: RefObject<HTMLCanvasElement | null
     const low = (nav.deviceMemory !== undefined && nav.deviceMemory <= 2) || navigator.hardwareConcurrency <= 2;
     if (reducedMotion || nav.connection?.saveData || low) return;
 
+    canvas.style.position = "absolute";
+    canvas.style.top = "0";
+    canvas.style.left = "0";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.zIndex = "0";
+    canvas.style.pointerEvents = "auto";
+
     let webglContext: WebGLRenderingContext | WebGL2RenderingContext | null = null;
     try {
       webglContext = canvas.getContext("webgl2", { alpha: true, antialias: false, depth: true, stencil: false, premultipliedAlpha: true, preserveDrawingBuffer: false }) ||
@@ -49,6 +57,7 @@ export function useThreeBackground(canvasRef: RefObject<HTMLCanvasElement | null
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, context: webglContext, antialias: !mobile, alpha: true, powerPreference: mobile ? "default" : "high-performance" });
+      renderer.setClearColor(0x000000, 0);
       renderer.setPixelRatio(pixelRatio(width, height, mobile));
       renderer.setSize(width, height, false);
     } catch {
@@ -175,7 +184,6 @@ export function useThreeBackground(canvasRef: RefObject<HTMLCanvasElement | null
       canvas.removeEventListener("click", handleClick);
       geometry.dispose(); material.dispose(); lineGeometry.dispose(); lineMaterial.dispose();
       renderer.dispose();
-      try { renderer.forceContextLoss(); } catch {}
       scene.clear();
       initialized.current = false;
     };
