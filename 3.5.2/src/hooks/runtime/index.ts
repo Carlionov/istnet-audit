@@ -5,13 +5,14 @@ export type { UseEventListenerOptions } from "@/hooks/runtime/useEventListener";
 export { useFocusTrap } from "@/hooks/runtime/useFocusTrap";
 export type { UseFocusTrapOptions } from "@/hooks/runtime/useFocusTrap";
 export { useIntersectionObserver } from "@/hooks/runtime/useIntersectionObserver";
-export type {
-  IntersectionObserverState,
-  UseIntersectionObserverOptions,
-} from "@/hooks/runtime/useIntersectionObserver";
+export type { IntersectionObserverState, UseIntersectionObserverOptions } from "@/hooks/runtime/useIntersectionObserver";
 export { useInterval } from "@/hooks/runtime/useInterval";
 export { useLatest } from "@/hooks/runtime/useLatest";
 export { usePageVisibility } from "@/hooks/runtime/usePageVisibility";
 export { useReducedMotion } from "@/hooks/runtime/useReducedMotion";
 export { useTimeout } from "@/hooks/runtime/useTimeout";
 export { useMediaQuery } from "@/hooks/runtime/useMediaQuery";
+export { useThreeBackground } from "@/hooks/runtime/useThreeBackground";
+export { useThreeGlobe } from "@/hooks/runtime/useThreeGlobe";
+export { useSmoothScroll } from "@/hooks/runtime/useSmoothScroll";
+export { useGsapAnimations } from "@/hooks/runtime/useGsapAnimations";
